@@ -1,0 +1,61 @@
+\newif\ifshowsolutions
+% \showsolutionstrue
+\input{preamble}
+
+\usepackage{url}
+
+
+\chead{%
+  {\vbox{%
+      \vspace{2mm}
+      \large
+      Machine Learning \& Data Mining \hfill
+      Caltech CS/CNS/EE 155 \hfill \\[1pt]
+      Final Exam \hfill
+      March 15th, 2020 \\
+    }
+  }
+}
+\newcommand{\fh}{\hat{f}}
+\newcommand{\St}{\tilde{\Sigma}}
+\newcommand{\Zt}{\tilde{Z}}
+\newcommand{\Xt}{\tilde{X}}
+\newcommand{\tr}{\texttt{trace}}
+\newcommand{\yh}{\hat{y}}
+\newcommand{\fb}{\bar{f}}
+
+
+\begin{document}
+\pagestyle{fancy}
+
+\begin{itemize}
+\item Due noon, March 24th, via Gradescope.
+\item No extensions, and you cannot use late hours.
+\item No collaboration, you must answer these questions all on your own.
+\item You are free to ask clarification questions on Piazza.
+\item This exam is designed to take 3-5 hours to do.
+\item Suggestion: Write the solutions by hand (no LaTeX) and submit a scanned copy.  It will save you time.
+\item All questions have short answers.  If your answer is very long, you're probably over-thinking it.
+\end{itemize}
+\medskip
+
+
+\newpage
+
+\input{sec-multiple.tex}
+
+\newpage
+\input{sec-naivebayes.tex}
+
+\newpage
+\input{sec-transform.tex}
+
+\newpage
+
+\input{sec-embedding.tex}
+
+\newpage
+
+\input{sec-neuralnet.tex}
+
+\end{document}

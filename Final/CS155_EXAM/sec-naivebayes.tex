@@ -1,0 +1,41 @@
+\section{Naive Bayes (20 points)}
+
+We consider the following Naive Bayes model:
+$$P(Happy?,Grade,Year) = P(Happy?)P(Grade|Happy?)P(Year|Happy?).$$
+In other words, the $y$ is the Happy? variable, and the two $x$'s are the Grade and Year variables.  We assume that all variables take two values, $Happy? \in \{Yes,No\}$, $Grade\in\{A,C\}$, and $Year\in\{Freshman,Senior\}$.
+
+
+Consider the following training data:
+\begin{center}
+\begin{tabular}{lll}
+\hline
+\hline
+Grade & Year & Happy?\\
+\hline
+A & Senior & Yes\\
+A & Senior & Yes\\
+A & Senior & No\\
+A & Freshman & Yes\\
+C & Freshman & No\\
+C & Freshman & No\\
+C & Senior & No\\
+C & Senior & Yes\\
+\hline
+\hline
+\end{tabular}
+\end{center}
+
+\smallskip
+
+\textbf{Question 1:} (8 points) Fit the model parameters of the Naive Bayes using maximum likelihood with uniform unit pseudocounts.  For instance, the maximum likelihood estimate for $P(Grade|Happy?)$ is:
+$$P(Grade=A|Happy?=Yes) = \frac{1 + \sum_{(x,y)}{1_{[x_{Grade}=A\wedge y=Yes]}}}{2 + \sum_{(x,y)}{1_{[y=Yes]}}}.$$ (Check Lecture 12, Slide 38. Notice that we are using $\lambda = 2$ here.)
+Write out the final probability tables, i.e. $P(Grade | Happy?)$, $P(Year | Happy?)$ and $P(Happy?)$.
+
+\smallskip
+
+\textbf{Question 2:} (5 points) Compute $P(Year=Freshman,Grade=C,Happy?=No)$ using the trained model from Question 1.
+
+
+\smallskip
+
+\textbf{Question 3:} (7 points) Write out the pseudocode for drawing a sample from any trained model.  Assume you have repeated access to a function \texttt{random}() that returns a uniform random number in $[0,1]$.

@@ -1,0 +1,38 @@
+\section{Latent Markov Embedding (15 points)}
+
+This problem deals with the song embedding model from \href{http://www.cs.cornell.edu/People/tj/publications/chen_etal_12a.pdf}{Playlist Prediction via Metric Embedding}.
+The paper describes two models, a dual-point model and a single-point model.
+In the dual-point model, the transition probability from song $s$ to song $s'$ is:
+\begin{align}
+P(s'|s) = \frac{e^{-\|U(s') - V(s)\|_2^2}}{Z(s)}. \label{eqn:single1}
+\end{align}
+The probability of a playlist $p = \langle p^{[1]}, \ldots, p^{[M_p]}\rangle$ is:
+$$P(p) = \prod_{i=1}^{M_p} P(p^{[i]}|p^{[i-1]}).$$
+Note that there is a special ``start'' song, which you can ignore for the questions below.
+The total probability of a dataset $S$ of playlists is then:
+\begin{align}
+P(S) = \prod_{p\in S} P(p) = \prod_{p\in S} \prod_{i = 1}^{M_p} \frac{e^{-\|U(p^{[i]}) - V(p^{[i-1]})\|_2^2}}{Z(p^{[i - 1]})},\ \ \ \mbox{with:} \ \ Z(s) = \sum_{s'} e^{-\|U(s') - V(s))\|_2^2}.\label{eqn:single2}
+\end{align}
+
+In the single-point model, there is only one vector $X$ representing each song (in contrast to the two vectors $U$ and $V$ used in the dual-point model).
+The transition probability from song $s$ to song $s'$ is:
+\begin{align}
+P(s'|s) = \frac{e^{-\|X(s') - X(s)\|_2^2}}{Z(s)}. \label{eqn:dual1}
+\end{align}
+This results in the total probability of the dataset being:
+\begin{align}
+P(S) = \prod_{p\in S} P(p) = \prod_{p\in S} \prod_{i = 1}^{M_p} \frac{e^{-\|X(p^{[i]}) - X(p^{[i-1]})\|_2^2}}{Z(p^{[i - 1]})},\ \ \ \mbox{with:} \ \ Z(s) = \sum_{s'} e^{-\|X(s') - X(s))\|_2^2}.\label{eqn:dual2}
+\end{align}
+
+For the following problems, assume that the optimal choices for $U$, $V$, and $X$ are selected (i.e., the ones that maximize $P(S)$).
+\smallskip
+
+\textbf{Question 1:} (8 points) 
+Show that the data likelihood $P(S)$ for the dual-point model \eqref{eqn:single2} is never less than the data likelihood for the single-point model \eqref{eqn:dual2}.
+\smallskip
+
+\textbf{Question 2:} (7 points)
+If \eqref{eqn:single1} is equal to \eqref{eqn:dual1} for every pair of songs $s$ and $s'$, what does that imply about the relationship between $U$, $V$, and $X$?
+
+\smallskip
+(Hint: the answers to the two questions are related.)

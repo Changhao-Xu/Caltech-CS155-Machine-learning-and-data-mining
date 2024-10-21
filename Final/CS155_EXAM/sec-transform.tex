@@ -1,0 +1,58 @@
+\newcommand{\wt}{\tilde{w}}
+\newcommand{\xt}{\tilde{x}}
+
+\section{Data Transformations (15 points)}
+
+We consider the problem of linear regression, where we predict real values given input features $x$ via $w^T x$ using a linear model $w$ (ignoring the bias term).
+Suppose we want to transform the data points $x$ to a new representation via a transformation matrix: $\xt = Ax$.  For instance, $A$ can be a rescaling of the dimensions of $x$:
+\begin{eqnarray}
+A = \left[\begin{array}{cccc}
+a_1& 0 & \ldots& 0\\
+0& a_2 & \ldots& 0\\
+\vdots & \vdots & \ddots & \vdots\\
+0 & 0 & \ldots & a_D
+\end{array}\right],
+\label{eqn:A}
+\end{eqnarray}
+where each $a_d>0$ scales each dimension.
+
+\textbf{Question 1:} (5 points) What is the relationship between $w$ and $\wt$?  In other words, write $w$ as a function of $\wt$ and $A$ such that $w^T x = \wt^T \xt$ holds for all $x$.
+Assume that $A$ is a square, invertible matrix.
+
+\begin{solution}
+$w = A^T \wt$ gives:
+$$\wt^T\xt = \left((A^T)^{-1}w\right)^T\left(Ax\right) = \left((A^{-1})^T w\right)^T\left(Ax\right) = w^T A^{-1} A x = w^T x.$$
+\end{solution}
+
+
+\bigskip
+
+Consider the ridge regression learning objective on the transformed data:
+\begin{eqnarray}
+\argmin_{\wt} \frac{\lambda}{2}\|\wt\|^2 + \sum_{i}(y_i - \wt^T\xt_i)^2,\label{eqn:transform}
+   \end{eqnarray}
+
+
+\smallskip
+
+\textbf{Question 2:} (5 points) Rewrite \eqref{eqn:transform} using $w$, $x$, and $A$. In other words, what is the optimization problem that yields the $w$ that corresponds to the $\wt$ learned in \eqref{eqn:transform} (with the correspondence established in Question 1)?  Assume that $A$ is a square, invertible matrix.
+
+\begin{solution}
+$$\argmin_{w} \frac{\lambda}{2}(w^TMw) + \sum_{i}(y_i - w^Tx_i)^2,$$
+where $M = A^{-1}(A^{-1})^T$.
+\end{solution}
+
+\smallskip
+
+\textbf{Question 3:} (5 points) Interpret your answers to Question 1 and Question 2 when  $A$ is a rescaling transformation such as \eqref{eqn:A}. In other words, how is your answer to Question 2 different from standard ridge regression for $w$:
+$$
+\argmin_{w} \frac{\lambda}{2}\|w\|^2 + \sum_{i}(y_i - w^Tx_i)^2.
+$$
+
+\begin{solution}
+When $A$ is as \eqref{eqn:A}, then the learning objective becomes
+$$
+\argmin_{w} \frac{\lambda}{2}\sum_d \frac{w_d^2}{a_D^2} + \sum_{i}(y_i - w^Tx_i)^2.
+$$
+In other words, rescaling the individual feature dimensions by $a_d$ is equivalent to rescaling the regularization penalty for that feature dimension by $1/a_d^2$.
+\end{solution}
